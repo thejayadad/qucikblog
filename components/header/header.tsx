@@ -6,6 +6,7 @@ import Box from '../ui/box'
 import Logo from '../ui/logo'
 import SearchBar from './search-bar'
 import UserMenu from './user-menu'
+import Categories from './categories'
 
 const Header = async () => {
   const session = await auth()
@@ -30,7 +31,7 @@ const Header = async () => {
           </div>              
         </Box>       
       </div>
-      Categories
+      <Categories />
     </header>
   )
 }

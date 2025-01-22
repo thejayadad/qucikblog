@@ -1,11 +1,31 @@
 import React from 'react'
-import { FiUser, FiSettings, FiLogOut, FiMenu } from 'react-icons/fi'
-import SignOut from './signout-btn';
+import { FiUser, FiSettings, FiLogOut, FiMenu, FiMessageSquare } from 'react-icons/fi'
+import SignOut from './signout-btn'
+import Link from 'next/link'
 
 interface UserMenuProps {
   userEmail?: string;
   userImage?: string;
 }
+
+// Define menu items array for better modularity
+const menuItems = [
+  {
+    label: 'New Post',
+    href: '/admin/new',
+    icon: FiMessageSquare,
+  },
+  {
+    label: 'Profile',
+    href: '/profile',
+    icon: FiUser,
+  },
+  {
+    label: 'Settings',
+    href: '/settings',
+    icon: FiSettings,
+  }
+];
 
 const UserMenu: React.FC<UserMenuProps> = ({ userEmail, userImage }) => {
   return (
@@ -15,7 +35,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ userEmail, userImage }) => {
 
       <label 
         htmlFor="usermenu-toggle" 
-        className="flex items-center space-x-2 cursor-pointer p-2 border  rounded-full hover:bg-gray-300 transition"
+        className="flex items-center space-x-2 cursor-pointer p-2 border rounded-full hover:bg-gray-300 transition"
       >
         {userImage ? (
           <img src={userImage} alt="User Avatar" className="w-8 h-8 rounded-full border border-gray-300" />
@@ -34,17 +54,18 @@ const UserMenu: React.FC<UserMenuProps> = ({ userEmail, userImage }) => {
           <li className="px-4 py-2 text-gray-700 font-medium border-b border-gray-200">
             Hi, {userEmail ? userEmail : 'Guest'}
           </li>
-          
-          <li>
-            <a href="/profile" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
-              <FiUser className="w-5 h-5 mr-2" /> Profile
-            </a>
-          </li>
-          <li>
-            <a href="/settings" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
-              <FiSettings className="w-5 h-5 mr-2" /> Settings
-            </a>
-          </li>
+
+          {/* Dynamic Links */}
+          {menuItems.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                <item.icon className="w-5 h-5 mr-2" />
+                {item.label}
+              </Link>
+            </li>
+          ))}
+
+          {/* Sign Out Button */}
           <li>
             <SignOut />
           </li>
