@@ -1,0 +1,52 @@
+import React from 'react'
+import { FiUser, FiSettings, FiLogOut } from 'react-icons/fi'
+import SignOut from './signout-btn';
+
+interface UserMenuProps {
+  userEmail?: string;
+  userImage?: string;
+}
+
+const UserMenu: React.FC<UserMenuProps> = ({ userEmail, userImage }) => {
+  return (
+    <div className="relative">
+      {/* Checkbox to control dropdown visibility */}
+      <input type="checkbox" id="usermenu-toggle" className="hidden peer" />
+
+      <label 
+        htmlFor="usermenu-toggle" 
+        className="flex items-center space-x-2 cursor-pointer p-2 rounded-md hover:bg-gray-300 transition"
+      >
+        {userImage ? (
+          <img src={userImage} alt="User Avatar" className="w-8 h-8 rounded-full border border-gray-300" />
+        ) : (
+          <FiUser className="w-6 h-6 text-gray-700" />
+        )}
+        <span className="text-gray-700 font-medium">{userEmail || 'User'}</span>
+      </label>
+
+      {/* Dropdown Menu */}
+      <div 
+        className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg opacity-0 peer-checked:opacity-100 peer-checked:visible invisible transition-all duration-200 ease-in-out"
+      >
+        <ul className="py-2">
+          <li>
+            <a href="/profile" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+              <FiUser className="w-5 h-5 mr-2" /> Profile
+            </a>
+          </li>
+          <li>
+            <a href="/settings" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+              <FiSettings className="w-5 h-5 mr-2" /> Settings
+            </a>
+          </li>
+          <li>
+        <SignOut  />
+          </li>
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+export default UserMenu
