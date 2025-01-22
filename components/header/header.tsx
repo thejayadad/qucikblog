@@ -17,7 +17,9 @@ const Header = async () => {
       <div className='py-4 border-b-[1px]'>
         <Box>
           <div className='flex flex-row items-center justify-between gap-3 md:gap-0'>
+            <div className='hidden md:block'>
             <Logo />
+            </div>
             <SearchBar />
             {session ? (
               <UserMenu userEmail={userEmail} userImage={userImage} />
@@ -28,6 +30,7 @@ const Header = async () => {
           </div>              
         </Box>       
       </div>
+      Categories
     </header>
   )
 }

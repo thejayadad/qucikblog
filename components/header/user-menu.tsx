@@ -1,5 +1,5 @@
 import React from 'react'
-import { FiUser, FiSettings, FiLogOut } from 'react-icons/fi'
+import { FiUser, FiSettings, FiLogOut, FiMenu } from 'react-icons/fi'
 import SignOut from './signout-btn';
 
 interface UserMenuProps {
@@ -15,21 +15,26 @@ const UserMenu: React.FC<UserMenuProps> = ({ userEmail, userImage }) => {
 
       <label 
         htmlFor="usermenu-toggle" 
-        className="flex items-center space-x-2 cursor-pointer p-2 rounded-md hover:bg-gray-300 transition"
+        className="flex items-center space-x-2 cursor-pointer p-2 border  rounded-full hover:bg-gray-300 transition"
       >
         {userImage ? (
           <img src={userImage} alt="User Avatar" className="w-8 h-8 rounded-full border border-gray-300" />
         ) : (
-          <FiUser className="w-6 h-6 text-gray-700" />
+          <FiUser className="w-8 h-8 text-gray-700 border border-gray-300 rounded-full p-1" />
         )}
-        <span className="text-gray-700 font-medium">{userEmail || 'User'}</span>
+        <FiMenu className="w-8 h-8 text-gray-700" />
       </label>
 
       {/* Dropdown Menu */}
       <div 
-        className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg opacity-0 peer-checked:opacity-100 peer-checked:visible invisible transition-all duration-200 ease-in-out"
+        className="absolute right-0 mt-2 w-60 bg-white border border-gray-300 rounded-md shadow-lg opacity-0 peer-checked:opacity-100 peer-checked:visible invisible transition-all duration-200 ease-in-out"
       >
         <ul className="py-2">
+          {/* Greeting */}
+          <li className="px-4 py-2 text-gray-700 font-medium border-b border-gray-200">
+            Hi, {userEmail ? userEmail : 'Guest'}
+          </li>
+          
           <li>
             <a href="/profile" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
               <FiUser className="w-5 h-5 mr-2" /> Profile
@@ -41,7 +46,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ userEmail, userImage }) => {
             </a>
           </li>
           <li>
-        <SignOut  />
+            <SignOut />
           </li>
         </ul>
       </div>
