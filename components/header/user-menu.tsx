@@ -2,6 +2,7 @@ import React from 'react'
 import { FiUser, FiSettings, FiLogOut, FiMenu, FiMessageSquare } from 'react-icons/fi'
 import SignOut from './signout-btn'
 import Link from 'next/link'
+import NewPost from './new-post';
 
 interface UserMenuProps {
   userEmail?: string;
@@ -10,11 +11,6 @@ interface UserMenuProps {
 
 // Define menu items array for better modularity
 const menuItems = [
-  {
-    label: 'New Post',
-    href: '/admin/new',
-    icon: FiMessageSquare,
-  },
   {
     label: 'Profile',
     href: '/profile',
@@ -54,7 +50,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ userEmail, userImage }) => {
           <li className="px-4 py-2 text-gray-700 font-medium border-b border-gray-200">
             Hi, {userEmail ? userEmail : 'Guest'}
           </li>
-
+          <NewPost userEmail={userEmail} />
           {/* Dynamic Links */}
           {menuItems.map((item) => (
             <li key={item.href}>

@@ -9,6 +9,10 @@ import SubmitButton from './submit-btn';
 
 interface Props {
   userEmail: string;
+  initialData: {
+    title: string;
+  },
+  postId: string;
 }
 
 interface FormState {
@@ -21,7 +25,7 @@ interface FormState {
   loading?: boolean;
 }
 
-const TitleForm: React.FC<Props> = ({ userEmail }) => {
+const TitleForm: React.FC<Props> = ({ userEmail, initialData, postId}) => {
   const router = useRouter();
 
   // useActionState to handle form state and submission
